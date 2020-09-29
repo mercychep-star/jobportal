@@ -12,10 +12,16 @@ class MyAdminAccounts(UserAdmin):
     ordering = ('email','first_name',)
     readonly_fields = ['date_joined']
 
-    add_fieldsets = (None,{
+    add_fieldsets = (
+        (None,{
         'classes':('wide',),
-        'fields':('email','first_name','last_name','password1','password2','is_employee','is_employer'),
-    })
+        'fields':('email','first_name','last_name','password1','password2','is_employee','is_employer','is_active'),
+    }),
+    )
+    fieldsets = (
+        (None,{'fields':('email','first_name','last_name','password')}),
+        ('permissions',{'fields':('is_staff','is_active','is_employee','is_employer')})
+    )
 
 
 
