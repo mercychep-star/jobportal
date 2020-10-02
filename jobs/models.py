@@ -5,6 +5,21 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 from job import settings
+class Category(models.Model):
+    title = models.CharField(max_length=50)
+    slug = models.SlugField(default=None,editable=False)
+
+
+    def __str__(self):
+        return self.title
+
+    def save(self,*args,**kwargs):
+        self.slug=slugify(self.title)
+        super(Category, self).save(*args,**kwargs)
+
+    def job_count(self):
+        return self.jobs.all().count()
+
 
 
 class Job(models.Model):
@@ -23,6 +38,7 @@ class Job(models.Model):
     publishing_date = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(default=None,editable=False)
     employer = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,default=None)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name="jobs",default=0)
 
 
     def __str__(self):
