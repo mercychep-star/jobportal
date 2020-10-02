@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import Account
+from .models import Account, Profile
+
+
 # Register your models here.
 
 class MyAdminAccounts(UserAdmin):
@@ -28,3 +30,4 @@ class MyAdminAccounts(UserAdmin):
 
 
 admin.site.register(Account,MyAdminAccounts)
+admin.site.register(Profile)

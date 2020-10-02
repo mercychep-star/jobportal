@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from.models import Account
+from .models import Account, Profile
 
 
 class AccountRegisterForm(UserCreationForm):
@@ -11,4 +11,14 @@ class AccountRegisterForm(UserCreationForm):
     class Meta:
         model= Account
         fields = ['email','first_name','last_name']
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ('user',)
+
+        widgets={
+            'birth_day': forms.DateInput(attrs={'type':'date'})
+        }
 
