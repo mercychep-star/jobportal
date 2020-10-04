@@ -193,7 +193,7 @@
 			<div class="container">
 				<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
-          	<span class="subheading">Recently Added Jobs</span>
+          	<span class="subheading">Results for {{request.Get.job_title }} </span>
             <h2 class="mb-4"><span>Recent</span> Jobs</h2>
           </div>
         </div>
@@ -248,7 +248,7 @@
             <div class="block-27">
               <ul>
                   {% if page_obj.has_previous %}
-                <li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                <li><a href="?job_title={{ request.GET.job_title }}&job_type{{request.GET.job_type}}&job_location={{ request.GET.location}}&page={{ page_obj.previous_page_number }}">&lt;</a></li>
                   {% else %}
                   <li class="disabled"><span>&lt;</span></li>
                   {% endif %}
@@ -257,11 +257,11 @@
 
                 <li class="active"><span>{{ i }}</span></li>
                   {% else %}
-                <li><a href="?page={{ i }}">{{ i }}</a></li>
+                <li><a href="?job_title={{ request.GET.job_title }}&job_type{{request.GET.job_type}}&job_location={{ request.GET.location}}&page={{ i }}">{{ i }}</a></li>
                 {% endif %}
                   {% endfor %}
                   {% if page_obj.has_next %}
-                <li><a href="?page={{page_obj.next_page_number}}">></a></li>
+                <li><a href="?job_title={{ request.GET.job_title }}&job_type{{request.GET.job_type}}&job_location={{ request.GET.location}}&page={{page_obj.next_page_number}}">></a></li>
                   {% else %}
                   <li class="disabled"><span>&gt;</span></li>
                   {% endif %}
